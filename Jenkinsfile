@@ -68,6 +68,7 @@ pipeline {
 	stage('Ansible Configuration') {
    	    steps {
         	script {
+			sh 'terraform init -reconfigure'
             		// Get Terraform output dynamically
             		def publicIp = sh(script: "terraform output -raw public_ip", returnStdout: true).trim()
 
