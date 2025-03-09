@@ -75,7 +75,7 @@ pipeline {
             steps {
                 script {
                     //sh 'terraform init -reconfigure'
-                    
+                    sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
                     def ec2_public_ip = sh(script: "cd terraform && terraform output -raw public_ip", returnStdout: true).trim()
 
                     writeFile file: "${INVENTORY_FILE}", text: """
