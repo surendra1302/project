@@ -75,7 +75,7 @@ pipeline {
             steps {
                 script {
                     //sh 'terraform init -reconfigure'
-                    sh 'echo "123" | sudo -S su
+                    sh 'sudo -S su
 '
                     def ec2_public_ip = sh(script: "cd terraform && terraform output -raw public_ip", returnStdout: true).trim()
 
