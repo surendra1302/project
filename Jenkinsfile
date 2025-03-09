@@ -5,7 +5,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION    = "us-east-1"
-	private_key_file      = "${env.HOME}/.ssh/my-aws-key"
+	private_key_file      = "${env.WORKSPACE}/.ssh/my-aws-key"
     }
 
     parameters {
