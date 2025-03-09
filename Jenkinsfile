@@ -5,7 +5,8 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION    = "us-east-1"
-        PRIVATE_KEY_FILE      = "${env.WORKSPACE}/.ssh/my-aws-key.pem"
+//        PRIVATE_KEY_FILE      = "${env.WORKSPACE}/.ssh/my-aws-key.pem"
+        PRIVATE_KEY_FILE      = "/var/lib/jenkins/workspace/first_job3/.ssh/my-aws-key.pem"
         INVENTORY_FILE        = "inventory.ini"
     }
 
@@ -73,7 +74,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'terraform init -reconfigure'
+                    //sh 'terraform init -reconfigure'
                     def ec2_public_ip = sh(script: "cd terraform && terraform output -raw public_ip", returnStdout: true).trim()
 
                     writeFile file: "${INVENTORY_FILE}", text: """
