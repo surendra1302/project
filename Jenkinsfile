@@ -5,6 +5,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION    = "us-east-1"
+	private_key_file      = "${env.HOME}/.ssh/my-aws-key"
     }
 
     parameters {
@@ -69,7 +70,7 @@ pipeline {
             steps {
                 script {
                     def publicIp = readFile 'terraform/public_ip.txt'.trim()
-                    sh "echo '${publicIp} ansible_ssh_user=ubuntu ansible_ssh_private_key_file=~/.ssh/my-aws-key
+                    sh "echo '${publicIp} ansible_ssh_user=ubuntu ansible_ssh_private_key_file=${private_key_file}
 .pem' > ansible/inventory.ini"
                 }
                 dir('ansible') {
