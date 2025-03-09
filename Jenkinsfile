@@ -69,6 +69,7 @@ pipeline {
    	    steps {
         	script {
 			sh 'terraform init -reconfigure'
+			
             		// Get Terraform output dynamically
             		def publicIp = sh(script: "terraform output -raw public_ip", returnStdout: true).trim()
 
@@ -79,7 +80,7 @@ pipeline {
             		sh """
             		 echo "[web]" > inventory.ini
            		 echo "${publicIp} ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/var/lib/jenkins/workspace/terraform-ansible/.ssh/my-aws-key.pem" >> inventory.ini
- 	                 ansible-playbook -i inventory.ini playbook.yml
+ 	                 ansible-playbook -i /var/lib/jenkins/workspace/terraform/ansible/inventory.ini /var/lib/jenkins/workspace/terraform/ansible/playbook.yml
            		   """
         }
     }
