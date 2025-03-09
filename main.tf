@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 # Security Group
-resource "aws_security_group" "webserver_access" {
+resource "aws_security_group" "webserver_accesss" {
   name        = "webserver_access"
   description = "Allow SSH & HTTP"
 
