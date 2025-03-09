@@ -72,7 +72,7 @@ pipeline {
                     def publicIp = readFile 'terraform/public_ip.txt'.trim()
                     sh "echo '${publicIp} ansible_ssh_user=ubuntu ansible_ssh_private_key_file=${private_key_file}.pem' > ansible/inventory.ini"
                 }
-                dir('ansible') {
+                dir('terraform/ansible') {
                     sh 'ansible-playbook -i inventory.ini playbook.yml'
                 }
             }
